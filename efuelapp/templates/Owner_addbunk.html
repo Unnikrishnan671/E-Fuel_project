@@ -1,0 +1,90 @@
+{% extends 'Owner_index.html'%} {% load static %} {% block content %}
+<head>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+          
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+</head>
+<div class="row">
+    <div class="col-75">
+      <div class="container-fluid">
+        <center><h2 class="mt-3 mb-3"><span style="color: rgb(168, 168, 168);">Add Bunk</span></h2></center>
+        <form  method="POST">
+          <div class="row">
+            <div class="col-50">
+              <input type="text" id="name" name="name" required placeholder="Bunk name">  
+            </div>
+            <div class="col-50">
+                    <label for="eca">Vehicle type:</label>
+                      <input type="checkbox" id="car" name="car" value="car">
+                      <label for="car">Car</label>
+                      <input type="checkbox" id="bike" name="bike" value="bike">
+                      <label for="NSS">Bike</label>
+                      <input type="checkbox" id="auto" name="auto" value="auto">
+                      <label for="auto">Auto</label>
+            </div><br>
+            </div>
+            <div class="row">
+              <div class="col-50">
+                <label>Connecters</label><br><br>
+                  <input type="checkbox" name="technicalmachinery" value="Yes">J1772<br><br>
+                  <input type="checkbox" name="technical_computers" value="Yes">Type 2<br><br>
+                  <input type="checkbox" name="technical_research" value="Yes">Type 3A<br><br>
+                  <input type="checkbox" name="electronics" value="Yes">Type 3C<br><br>
+                  <input type="checkbox" name="other_theme" value="Yes">TeslaR<br><br>
+              </div>
+              <div class="col-50">
+                  <label>Connecters</label><br><br>
+                  <input type="checkbox" name="History" value="Yes">CHAdMO<br><br>
+                  <input type="checkbox" name="political_science" value="Yes">CCS 1<br><br>
+                  <input type="checkbox" name="design_art" value="Yes">CCS 2<br><br>
+                  <input type="checkbox" name="paintings" value="Yes">EU-Schuko<br><br>
+                  <input type="checkbox" name="other_theme" value="Yes">Nema 15<br><br>
+             </div>
+          </div>
+     <h3>Contact Information</h3>
+            <div class="row">
+              <div class="col-50">
+                  <input type="email" name="email" required placeholder="Email">
+              </div>
+              <div class="col-50">
+                 <input type="number" name="phone" required placeholder="Phone">
+             </div>
+             </div>
+              <div class="row">
+                <div class="col-50">
+                  <textarea name="address" id="address" placeholder="Street Address" rows="3" required></textarea>
+                </div>     
+           </div>
+           <div class="row">
+               <div class="col-50">
+                   <input type="text" name="city" required placeholder="City">
+               </div>
+               <div class="col-50">
+                  <input type="text" name="state" required placeholder="State">
+              </div>
+           </div>
+           <div class="row">
+              <div class="col-50">
+                  <input type="number" name="PIN_code" required placeholder="Zip Code">
+              </div>
+              <div class="col-50">
+                 <input type="text" name="country" required placeholder="Country">
+             </div>
+          </div>
+          <div class="row">
+            <div class="col-50">
+            <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Add Image</label>
+                
+                  <input type="file" class="form-control" id="exampleInputPassword2" name="file" placeholder="Add image" required>
+                </div>
+          </div>
+          <input type="submit" value="Book Now" class="btn">
+        </form>
+      </div>
+    </div>
+  </div>
+
+{%endblock%}

@@ -1,0 +1,219 @@
+{% extends 'User_index.html'%} {% load static %} {% block content %}
+
+<div class="container-fluid">
+    <div class="row border-top px-xl-5">
+        <div class="col-lg-3 d-none d-lg-block">
+            
+            <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 1;">
+                <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link" data-toggle="dropdown">Dresses <i class="fa fa-angle-down float-right mt-1"></i></a>
+                        <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
+                            <a href="" class="dropdown-item">Men's Dresses</a>
+                            <a href="" class="dropdown-item">Women's Dresses</a>
+                            <a href="" class="dropdown-item">Baby's Dresses</a>
+                        </div>
+                    </div>
+                    <a href="" class="nav-item nav-link">Shirts</a>
+                    <a href="" class="nav-item nav-link">Jeans</a>
+                    <a href="" class="nav-item nav-link">Swimwear</a>
+                    <a href="" class="nav-item nav-link">Sleepwear</a>
+                    <a href="" class="nav-item nav-link">Sportswear</a>
+                    <a href="" class="nav-item nav-link">Jumpsuits</a>
+                    <a href="" class="nav-item nav-link">Blazers</a>
+                    <a href="" class="nav-item nav-link">Jackets</a>
+                    <a href="" class="nav-item nav-link">Shoes</a>
+                </div>
+            </nav>
+        </div>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- Navbar End -->
+
+
+
+
+<!-- Shop Start -->
+<div class="container-fluid pt-5">
+    <div class="row px-xl-5">
+        <!-- Shop Sidebar Start -->
+        <div class="col-lg-3 col-md-12">
+            <!-- Price Start -->
+            <div class="border-bottom mb-4 pb-4">
+                <h5 class="font-weight-semi-bold mb-4 mt-5 ml-4">Categories</h5>
+                <form>
+                    <div class="custom-control d-flex align-items-center justify-content-between mb-3">
+                        <a href="" style="text-decoration: none;">All Products</a>
+                    </div>
+                    <div class="custom-control d-flex align-items-center justify-content-between mb-3">
+                        <a href="" style="text-decoration: none;">Ul&SA Electronic Cable</a>
+                    </div>
+                    <div class="custom-control d-flex align-items-center justify-content-between mb-3">
+                        <a href="" style="text-decoration: none;">VDE Cable</a>
+                    </div>
+                    <div class="custom-control d-flex align-items-center justify-content-between mb-3">
+                        <a href="" style="text-decoration: none;">BJ,FJ,Hear-Resistant Cross Linked Polyethlene Insulation Motor Cable</a>
+                    </div>
+                    <div class="custom-control d-flex align-items-center justify-content-between mb-3">
+                        <a href="" style="text-decoration: none;">PSE Cable</a>
+                    </div>
+
+                </form>
+            </div>
+            <!-- Price End -->
+            
+
+            <!-- Size End -->
+        </div>
+        <!-- Shop Sidebar End -->
+
+
+        <!-- Shop Product Start -->
+        <div class="col-lg-9 col-md-12">
+            <div class="row pb-3">
+                <div class="col-12 pb-1">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <form action="">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search by name">
+                                <div class="input-group-append">
+                                    <span class="input-group-text bg-transparent text-primary">
+                                        <i class="fa fa-search"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
+                    <div class="card product-item border-0 mb-4">
+                        <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                            <img class="img-fluid w-100" src="https://5.imimg.com/data5/SELLER/Default/2020/8/WR/PQ/FU/411746/15a-125v-two-prong-american-usa-ac-power-cord-500x500.jpg" alt="" style="width: 150px;height: 290px;">
+                        </div>
+                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                            <h6 class="text-truncate mb-3">Ul&SA Electronic Cable</h6>
+                            <div class="d-flex justify-content-center">
+                                <h6>$123.00</h6><h6 class="text-muted ml-2"></h6>
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between bg-light border">
+                            <a href="" class="btn btn-sm text-dark p-0 mr-3"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
+                            <a href="{% url 'User_addcart' %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
+                    <div class="card product-item border-0 mb-4">
+                        <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                            <img class="img-fluid w-100" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHCBYWEhYXFhUYGRgaGhwaGBgaHBUdGR8cHhwaGhwYHBofITAlHB8rHx0YJjgmKy8xNTVDHCQ7QD00Py40NTEBDAwMEA8QHxISHDQkJSs0ND40NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDU/NDY/NDQ0NDQ0NDQ0ND00NDQ0NDQxNP/AABEIAMIBAwMBIgACEQEDEQH/xAAcAAEAAQUBAQAAAAAAAAAAAAAABwEDBAUGAgj/xABGEAACAQIEAwUFBQUFBgcBAAABAgADEQQSITEFQVEGIjJhcQcTgZGhQlJigsFykqKx0RQjsuHwJDRTk9LxF0RUY3OjwhX/xAAZAQEBAQEBAQAAAAAAAAAAAAAAAQIDBAX/xAAlEQEBAAICAgEDBQEAAAAAAAAAAQIRAxIhMQQiQVETQmGBoQX/2gAMAwEAAhEDEQA/AJmiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiaHjnarC4W4qVAX/4ad6p8VHhHm1hA3sSJeJe1OqwPuKCovJ3YMflovyLTmcT28x7n/eGH4aar+ii3zl61NvoGJ8yYntHi3PfxWI/5rqPkHlgcWxPLE4j/n1P+qOpt9RRPmzCdqccvhxeI+LM4+rN/KdJwz2m4xbB2pVPJwEc+ng1+cdTabpWR/wr2nUGIXEU2oMeerKfTQMfgDO1wWOp1kzUnV16qQR6G2x8jJZpWXERApE8swAuTYDrLWFxSVFzIysL2upuLiNrr7siIiEIiICIiAiJ5ZgNzaB6iUlYCIiAiIgIiICIiAlnEV1RCzsFVRdmYgADqTMPjXF6WFotVqtlUbDmx5Ko5kyDO13bCtjX3yUhqtO5sB99z9pv+w5k2RNun7X+0J6jNSwpKINDUHjc32Xmi/xH8Mj9qLFiWuzXLFTsCdSz30B1vdtfXeeKD3A9LX+2fT7g8/8AtL6VSlswyi9lVbk38juT5kkfympBRUN7trfbf6E3ZvgLRUNtLL6G5/gFyPmJmU3V7r+8EOo/bO5/KPKwM8thCFupBT8BCU/TN4ifLcSjVV0tuCOndRR9dZ5pm/nfbVf6TLqYKoVLLTZlBtnSkcu9vG0yF4DibXNCpba9lNjppYev1jQ1aUb65b+eRWHrdSCJkUmzd0EnyUh//rqa/IytbBunjRk13qU3T5Mu091F0Gbw7Avaoh8hUXvKYHkU7AgC4HiCXIHm9B9V9RpL3DuLVcO4ehUZOV1JNM/ha+q/ssCPKY9S+ikeaqzXYedOqN/T6GWgxJvfXYvbX0qLsR5/z5BMvZT2i06xWlibUqugDbIx5X+6T+75i9pIM+Xfc28Wlr9xdWH4k6Kehkgdgu3hpMuHxL3pHSnUJuU5AMfuf4fTw5uJt3vbXhlavhrUWOZTmyXsHH3b9eY5TjeyHHTSqjMSFY5ainQqRpmtyIO/kTvpJUBuJH/b7gWRv7XTFgSBWA89BU+dgfges8/Ljd9p7j1cPJNfp5eqkEGVnO9juJ+9w4UnvJZT5j7J/T4Top0xymU3HDPG45WVWIiaZIiIHhmABJ0A1nC9pONAtcnujRV5+vqfp9Ztu1nG1pUyt730IG5P3R8Zr+zXZt2ZcRivHulLkg3BP4udp5uTfJl1x9fd6uKY8c75f03PZVaww6+90vqq81XkCevlN7KCVnoxx1NPNll2tqsREqEREBERAS3UcKCSQAASSdgBqSZckf8Ata4/7jCrQU9+uSCOfu18X7xKr6FoHAdsO1TYvFsQFaggKojC4K83tcEM2liCCNBObXEU2GtNhroFIIPnZhsPWYy1ge6VvmNybspHnzGmvKbFcFcZipK2Gos1gQpuSpBXxLynSIu4anTvmz2bYg3Um3IXA7o6a36za4DhC1RZXUsQbgEgga+EbeVhp6bzXYbhSsAEqBT91mAvztm016XA3l2vw6slveIcv2XUqGP5vC5AFt7yjIxXZyuuWyZ1ZgqKNDm5En+um/ITqsHw+hg8oqD+14iwurECnTO4DWHeIBvsfRRrNRwDjlT3hpMxL5f7p7eHWxYg35XFjfa19ZvKWDANvmTqbnmSdyT133nPPLr4i4478sDj/FsTXTKz5EOnu0Cqtri2upOw5zQ0qtRG0r1Rcg+N9RsftWP+U6nH4TTXfoP9azSVcJmIFrWPTlzE59r+W+sbLh/aHEoMrslVL6rUVTv1ZbfXNGJ4bhcSSaS/2TEHQJvSfnYC1uvIHfumeKGF7o1G2/x+QsZ5xWHvoeeX6n/RmpnYnWOXr8FdGcVly2NmpL3mbo6L9kedwPXaWXoOB4StraaZiOjsdA3prOh49Ud1bPUANNe4+ud1vYJpppqSTb1uTfkWxdth+EtfUeS6WX4TrLLNxzs09VUIFmdUHIAktcnYkX+sx7J9/peyto3W5tYS27X5b91uevIy3vbz7p/SRUxey3tVn/2OqxLqD7otobDxU9ztuPK45CSTWpKysrAFWBDA7EHQifL+CxbUqtOqpyujKQfNbEfMWv8AGfTXDcYtajTqr4XRWHxF7TOUIjrDK3DcflNzSbwt1pk7HzX9JJwNxcTTdp+EDEUCLd9O8h55hy+P9JpuyfazDuiUXqgVQciiza8lGa1geViek54Y5S2SeHbkzmWMtvn07WJSJtyJquOcRFCkWvY8vIczbn5DqRL3EuJ0qAU1XChjZb31PQWnFmm/EcVYhlw9Mgu17ZtLrTX56n+onPPL9s9u3Fx7+vL1P9ZXZjhzYmqMVWHcUn3KnUFr6v5gbA8zc9J3Mt0qYUBVAAAAAGgAGgAEuTWOMxmoxyZ3O7qsRE0wREQEREBERASDva9f/wDoZi18tFQi692+Y3+Jv8pOMhf2s4YtjgAL3pKbDe2YjSax9pUf8NQe82zELax0Gtlvmv5zoa+PZHIall53GVzuSRpYDQD5TTYfDOGqKAwLU83QggAj6hhLvEFZnRiRepSN9j3gCCN+flNzwyzvfK7BkqIragXFiLnbMwBN9raiXGxtagmaws42OXKw5XsBcj8Qa00S4H+7DMQBcXGh5n/KZ9FCquMxFjfKbkdfDtuBG2nQcAb3ru+oyoAo5KCSe70HdG2mnwnXYHC1a5CqpP3m+wPU/pvOT7Ggti8gUL75QBYWF1JJv+KzMSB9085NmDwq00VVFlUW/wAz5zhcbcrtuXUaXD9l03qMznoO6vy3PreZI7MYX/hfHM9/5zcxLqJtzmI7KU96RKG98p7y/XUTlOK8MeixDLzupGqkeR/SSdMbG4RatMo4uD8weRHmJLPBKhXtLRUpmbRQQSRe+tgPrOZo8HrVM5pUKjqQG8LAdb30HyM7PtQgpn3TZS4Y3B2soYK1ulzm/LL9Ti9OthqZz5HRMgCkpbKMoAO5BAGhOpM3xS68mftwuK4PWRSWp5cyq4JBHrv0mFWosA4K2sykfHNt15TeuwZnDg3NlGY6G5B07txoNttZcr1SxfQ5Qco36luZA2HSdNMubra5rfhP8/0Ik8eyzFF+GUwfsM6fAG4+hkQ18Otz3ANNb3128xb5yVfZQtsJUW1gKl7eqJM5TwR29RLqRrqCNNDr0M+bsfgXwWMqUWJuj91uZXxI4+FjPpSRf7ZeChqVPFKO9TIRz1Rj3SfRtPzTp8fPrlr8ufLN4u37L8WGJwqVNM1srgcnGjfPf4ibciRB7HeNEV6mHY6VFzL+0u/zU/wSQO2/Fv7Pgqjg2ZrInXM2lx6DMfhOfNJhlfw68MvJqT3fCLfaL2g9/iGCnuJdF87HvN8T9AJIfs24S+HwKmozF6p94VJNlBACqAdjYAn18pFnYzg/9sx6Kw7id9/2VIsvxNh8TPoICebim7cq+n87OYY48GPqPURE7PmEREBERAREQERECkij2sYe2Kw7kaPTNPcjUMftctWXWSvOK9qXDfe4LNbWm4b8p7rfzU/llntKiChWemxbLZrFSrDWzEsN+rBlvLDV3Y2VtgHRrDw8/TS37pEzO66Z2BLg5Ki3sSTs+2ua1wdO8v4hMepSsoAeykh0cCwVr7sPuk6EfZPkZ0ZZFkC3BJD6X6HlfmLEgdbEGe6IsSW3UWe3S+gUc22B6d2ZHC8Da5e1MG2dSdVbUKygcjrbqDblN7hKVOiyuBnqIpNMEWRTsHc3ubagE8zY7XAc3RxTq6Ol092c1Mgaow+yw6jW/UE8jpL3ZbtnTxAVK2WlXt4Se6/4qbHcH7u4nDYnFZ0s6otQspqOVUXAzZaQbxMdiSTp9kmxM0GPrKDkU5bEnLUUlCTzJto3mcp8zJcdrK+hokD4LtLjKAUU6tTL0LLVQDqA4JA56MZlj2k44A60z0JpWJ8/H+kz1q7TbOb7Rdq6OGBQEVKxHdpqdb9WI8I+v85EuM7W4+ucrVamXomSmu3MqL29TNadVAZr3NilPXMfxub5viW9ImJtf4piqmIqu9RgWY5nceBRyA6gCw87WF9TLKrYBgDYAhQd7c2+Fz8SBylVazZXGvKmhOhNtXbr/FyAWXmLK1rjNbvtslNdgfgdAo28ybTcFl6JVRlbwg6W+0eR65V/lLtNM7qlQW0HeNxlOhsbaEBco16y4tNQFvotyFB3LKbl2PTm3oF6zM4fgmqMULXfQksoIy3vct97d7HyE1pljVezrhyt75j49QNrX+Zc/lkpezan/sjuPC9Vin7KhUH+Ezku0eNenhCneOYrTQkjuLYKxF9T3NLDqTykkdmsD7nB0KZFiqDMPxHvN9SZzyajaTWdouHDEYSvRP26bAftWup+DAGbSWMXWyU3e18qs1uuUE2+kxPF2r5o7McQOHxlCptkqLm/ZJyP/CWkk+2THf7vRB5NUP0Vf/3IkxtfO7vlyhyzW5DMS2UHyvb4TZ8W4/VxTI9cqHRFpgDTRb2Judzckzr836sZY7/82THm3l41tKXsbwIFGvWtqzhAfJBc/VvpJKke+x7iKvg3pKtjSfvNcFWL3bS3QAD5SQpwwmsZD5OXflyv8qxETTgREQEREBERAREQExOI4UVaVSmdnUr8xofnMuIHzjjaDUKpNtrq6EXBXZlI522PoCNRcdRwnh6V0L0jYE6roWRiNG1HebfU6MByIIGf7RuE5MQrqLLVOYEcnHiHlfQ/EziMNiKmHqB6RsRe6WuCNMwC7FbAZk5aEciN45M1ucVhmpP3tAAwR9WAHPfV1PMHvDloLzFoF8/cF81yFuDmFrZqL7EnQWO1jcc5vKXFKeMptkUe9Ni1MkkNbXMpvc26jvrbmNZqkQJnVV11JpnYtzcEDX9tNd7jebRbqYhGbImRglx7tlI15hRuo5d3MDuQJq6z2JszILnuuA6D9l18P8M9VAGNvEeSVGAqfkqju1B63PpMZ8QVNs7J0FVSSPLOLn6iQWqqBtQiE9UcD+pjEIbmyvYEIO/yGpPxP855qDP9im/mrC/8ifrLT0dFGTkSe91/yAhpnYajcsxQb3OdyR/KZTsMrJnAte4pixt0JB2v+ITEwFIWK+7T8z38j0matUl2zOFFr2prrrZ7Z+Xz5ysrLvltb+7BGwsarX3sNMgPXu+pmThqNiqstua0QdbffqMfD+0QLfZHOeqSBKeZf7rvWLk3cg3sQ5GhJv4FJ1m17OYcZiyoco3d9DmP2rEnX8TEt0AlF/CcJ7137zGwUWsABqgy8lHJdzuZuqGFp4emzkhQBmdzrsbknrqfiTMtQiIzuwVF1Z2NgAep5A/vGcJx/jTYtwiBhQDWA2ao42JH2VHTludSLLdLG64GW4hjaQZbUkbPk/CpvdupawHxbrJknE+zfg/u6LVSO85sp/CumnkSDbyAnbTjbtolnEJmRh1Uj5iXokHxvVFmI6Ej6y3MjHraq46Ow/iMx4E6ewP/AHbFf/Kn+CSxIl9gZ/2fFD/3EP8AC39JLUtCIiQIiICIiAiIgIiICIiBq+O8KTFUGpNpfVW5qw2Yf61BMh7i/CmpuyOuV1PmAbbMrdDyYbfMSdZpe0XAUxVOx7rr4HtqD0PVT0llSoGrUSDmvldTfONNdwXA8Jv9tdOuszhxfP3MSrZjYiotiT0dhcB9/GpDDmW2m04vwd8OzLUWxvoRsRp3lPTT+s1FXCCxFhbmttL9culj5qVmpRXEISpKlayHc3BYftXFx+dQfMzX1ay20Zl/C4uvwzXFvRhKPhXU3RiCNtTcejAZh8R8ZafiVTXOqv5sLn99CGP5iZraaV92TbuUmvsRof1tLVaj3zamvQd5bWGg+ktvik3yZWvoQw/6b/WWjUS/ha3rJuK2OAJVrCmgvvqx8xt52l6pXbuXqKLjZAC2hI0IzGayjiaatcpfpdvrtMk8UOVRTpppfdGa2x0LMVI33Al3BueGYUuTlRidyzk6b2Ztbjn4mUazc4/j1GnQSmKpZxYXpgZV11sw08u5c/iE5ENiKwAdzl+6NR8FFkHwM2GE4YE12P3t2+Bt3fygepi5Jp6x1WviXU1mbIPBT8I23I2Unqbsb/GdN2S7PGvUAtZFtnYCwA5IvS/+Z83Z7s6+IYZe7TU95yDb9lfvN5cuclXh+ASjTCU1so+ZPMk8yZi1pfo0lVQqgBVAAA2AGgEuxEyERED5B4ytsTXHSq4/jaYM2faVbY3EjpXqj+NprIE1+wFu5jB50j9KgkwyF/YA3exg/DSP1qSaJaEREgREQEREBERAREQEREBERAw+IcPp10KVUDKeu4PUHcHzE4ji3YNgCaDhh9x9G9A2x+NpIcS7ED4rhtSiclRGU/iB19DzmG9BTut/P/OT/Woq6lWUMp3DAEfIznsX2JwjkkIyE/cYgfI3AjaIafhyHcH5n9ZbPB6fn/D/AEkrt7OqPKtUHqEP6Tz/AOHNP/1D/upLtUWJwmn5/O38rTJTBoPsj1Op+Zkn0fZ5QHiq1G9Mi/pNvw/sphaRBFIFhszksfUA6D5RsRlw/g1eqQKdJj+K1l9cx0nZ8H7CKpDYh853yLcL+Zt2+Fp28rJsWqVJVUKoCqBYAAAAdAJdiJAiIgIiIHD4v2X8OqVHqPTctUZnb+8cDMxLGwG2pMovsp4WP/LsfWrW/Rp3MQND2f7J4TBFzhqRplwA3fqNcLcjxMbbnab6IgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiIH//2Q==" alt="" style="width: 150px;height: 290px;">
+                        </div>
+                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                            <h6 class="text-truncate mb-3">VDE Cable</h6>
+                            <div class="d-flex justify-content-center">
+                                <h6>$123.00</h6><h6 class="text-muted ml-2"></h6>
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between bg-light border">
+                            <a href="" class="btn btn-sm text-dark p-0 mr-3"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
+                            <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
+                    <div class="card product-item border-0 mb-4">
+                        <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                            <img class="img-fluid w-100" src="https://www.schurter.sg/bundles/snceschurter/epim/_ImagePool_/newWS/IM0019489_M16A.jpg" alt="" style="width: 150px;height: 290px;">
+                        </div>
+                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                            <h6 class="text-truncate mb-3">PSE Cable</h6>
+                            <div class="d-flex justify-content-center">
+                                <h6>$123.00</h6><h6 class="text-muted ml-2"></h6>
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between bg-light border">
+                            <a href="" class="btn btn-sm text-dark p-0 mr-3"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
+                            <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Shop Product End -->
+    </div>
+</div>
+<!-- Shop End -->
+
+
+<!-- Footer Start -->
+<div class="container-fluid bg-secondary text-dark mt-5 pt-5">
+    <div class="row px-xl-5 pt-5">
+        <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
+            <a href="" class="text-decoration-none">
+                <h1 class="mb-4 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border border-white px-3 mr-1">E</span>Shopper</h1>
+            </a>
+            <p>Dolore erat dolor sit lorem vero amet. Sed sit lorem magna, ipsum no sit erat lorem et magna ipsum dolore amet erat.</p>
+            <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
+            <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
+            <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
+        </div>
+        <div class="col-lg-8 col-md-12">
+            <div class="row">
+                <div class="col-md-4 mb-5">
+                    <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-dark mb-2" href="index.html"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                        <a class="text-dark mb-2" href="shop.html"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
+                        <a class="text-dark mb-2" href="detail.html"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
+                        <a class="text-dark mb-2" href="cart.html"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
+                        <a class="text-dark mb-2" href="checkout.html"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                        <a class="text-dark" href="contact.html"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-dark mb-2" href="index.html"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                        <a class="text-dark mb-2" href="shop.html"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
+                        <a class="text-dark mb-2" href="detail.html"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
+                        <a class="text-dark mb-2" href="cart.html"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
+                        <a class="text-dark mb-2" href="checkout.html"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                        <a class="text-dark" href="contact.html"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <h5 class="font-weight-bold text-dark mb-4">Newsletter</h5>
+                    <form action="">
+                        <div class="form-group">
+                            <input type="text" class="form-control border-0 py-4" placeholder="Your Name" required="required" />
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control border-0 py-4" placeholder="Your Email"
+                                required="required" />
+                        </div>
+                        <div>
+                            <button class="btn btn-primary btn-block border-0 py-3" type="submit">Subscribe Now</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row border-top border-light mx-xl-5 py-4">
+        <div class="col-md-6 px-xl-0">
+            <p class="mb-md-0 text-center text-md-left text-dark">
+                &copy; <a class="text-dark font-weight-semi-bold" href="#">Your Site Name</a>. All Rights Reserved. Designed
+                by
+                <a class="text-dark font-weight-semi-bold" href="https://htmlcodex.com">HTML Codex</a>
+            </p>
+        </div>
+        <div class="col-md-6 px-xl-0 text-center text-md-right">
+            <img class="img-fluid" src="{% static 'img/payments.png' %}" alt="">
+        </div>
+    </div>
+</div>
+<!-- Footer End -->
+
+
+{%endblock%}
