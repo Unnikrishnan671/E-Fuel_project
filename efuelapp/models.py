@@ -1,10 +1,25 @@
 from django.db import models
+from django.contrib.auth.models import User
+
+
+class user_registration(models.Model):
+    fullname = models.CharField(max_length=240, null=True)
+    pincode = models.CharField(max_length=240, null=True)
+    district = models.CharField(max_length=240, null=True)
+    state = models.CharField(max_length=240, null=True)
+    country = models.CharField(max_length=240, null=True)
+    mobile = models.CharField(max_length=240, null=True)
+    email = models.EmailField(max_length=240, null=True)
+    password = models.CharField(max_length=240, null=True)
+    status = models.CharField(max_length=240, null=True, default='resign')
+    def __str__(self):
+        return self.fullname
 
 class bunk(models.Model):
     owner_ide = models.IntegerField(default='0', null=True, blank=True)
     bunk_name = models.CharField(max_length=100)
-    vehicle_type = models.BooleanField(default=False)
-    connector = models.BooleanField(default=False)
+    vehicle_type = models.CharField(max_length=100)
+    connector = models.CharField(max_length=100)
     email = models.EmailField(max_length=240, null=True)
     phone = models.CharField(max_length=240, null=True)
     address =models.CharField(max_length=225)
@@ -37,8 +52,8 @@ class bunk_booked(models.Model):
     name = models.CharField(max_length=240, null=True)
     email = models.EmailField(max_length=240, null=True)
     phone = models.CharField(max_length=240, null=True)
-    uservehicle_type = models.BooleanField(default=False)
-    userconnector = models.BooleanField(default=False)
+    uservehicle_type = models.CharField(max_length=100)
+    userconnector = models.CharField(max_length=100)
     date = models.DateField(
         auto_now_add=False, auto_now=False,  null=True, blank=True)
     time = models.TimeField(

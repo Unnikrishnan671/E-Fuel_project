@@ -22,7 +22,7 @@ a{color:inherit;text-decoration:none}
   width:100%;
   margin:auto;
   max-width:525px;
-  min-height:670px;
+  min-height:870px;
   position:relative;
   background:url(https://raw.githubusercontent.com/khadkamhn/day-01-login-form/master/img/bg.jpg) no-repeat center;
   box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
@@ -69,7 +69,7 @@ a{color:inherit;text-decoration:none}
   border-color:#1161ee;
 }
 .login-form{
-  min-height:345px;
+  min-height:445px;
   position:relative;
   perspective:1000px;
   transform-style:preserve-3d;
@@ -165,13 +165,15 @@ a{color:inherit;text-decoration:none}
     <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
     <div class="login-form">
       <div class="sign-in-htm">
+      <form class="pt-3" action="{% url 'login' %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
         <div class="group">
           <label for="user" class="label">Username</label>
-          <input id="user" type="text" class="input">
+          <input id="user" type="text" name="email" class="input">
         </div>
         <div class="group">
           <label for="pass" class="label">Password</label>
-          <input id="pass" type="password" class="input" data-type="password">
+          <input id="pass" type="password" class="input" name="password" data-type="password">
         </div>
         <div class="group">
           <input id="check" type="checkbox" class="check" checked>
@@ -180,39 +182,59 @@ a{color:inherit;text-decoration:none}
         <div class="form-group">
           <div class="col-md-2 col-sm-offset-4">
             <div class="group">
-                <input type="submit" class="button" value="Sign In">
-            </div>
+                <input type="submit" class="button" value="Sign Up">
+              </div>
         </div>
       </div>
         <div class="hr"></div>
         <div class="foot-lnk">
           <a href="#forgot">Forgot Password?</a>
         </div>
+      </form>
       </div>
+
       <div class="sign-up-htm">
+        <form class="pt-3" action="{% url 'Registration' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
         <div class="group">
-          <label for="user" class="label">Username</label>
-          <input id="user" type="text" class="input">
+          <label for="user" class="label">Full Name</label>
+          <input id="user" type="text" name="name" class="input">
         </div>
+        <div class="group">
+            <label for="pass" class="label">Pincode</label>
+            <input id="pass" type="text" name="pincode" class="input">
+        </div>
+        <div class="group">
+            <label for="user" class="label">District</label>
+            <input id="user" type="text" name="district" class="input">
+        </div>
+        <div class="group">
+            <label for="user" class="label">State</label>
+            <input id="user" type="text" name="state" class="input">
+        </div>
+        <div class="group">
+            <label for="user" class="label">Country</label>
+            <input id="user" type="text" name="country" class="input">
+        </div>
+        <div class="group">
+            <label for="user" class="label">Phone</label>
+            <input id="user" type="number" name="mobile" class="input">
+        </div>
+        <div class="group">
+            <label for="user" class="label">E-mail</label>
+            <input id="user" type="email" name="email" class="input">
+          </div>
         <div class="group">
           <label for="pass" class="label">Password</label>
-          <input id="pass" type="password" class="input" data-type="password">
-        </div>
-        <div class="group">
-          <label for="pass" class="label">Repeat Password</label>
-          <input id="pass" type="password" class="input" data-type="password">
-        </div>
-        <div class="group">
-          <label for="pass" class="label">Email Address</label>
-          <input id="pass" type="text" class="input">
+          <input id="pass" type="password" name="password" class="input" data-type="password">
         </div>
         <div class="group">
           <input type="submit" class="button" value="Sign Up">
         </div>
-        <div class="hr"></div>
         <div class="foot-lnk">
           <label for="tab-1">Already Member?</a>
         </div>
+        </form>
       </div>
     </div>
   </div>

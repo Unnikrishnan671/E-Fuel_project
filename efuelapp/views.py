@@ -16,78 +16,377 @@ from django.db.models import Q
 
 
 # Create your views here.
+
 def login(request):
+    if request.method == 'POST':
+        email  = request.POST['email']
+        password = request.POST['password']
+        user = authenticate(username=email,password=password)
+        if user is not None:
+            request.session['SAdm_id'] = user.id
+            return redirect( 'SuperAdmin_home')
+
+        elif user_registration.objects.filter(email=request.POST['email'], password=request.POST['password'],status="active").exists():
+        
+                member=user_registration.objects.get(email=request.POST['email'], password=request.POST['password'])
+                request.session['Own_id'] = member.id 
+                mem=user_registration.objects.filter(id= member.id)
+                return render(request,'Owner_home.html',{'mem':mem})
+
+        elif user_registration.objects.filter(email=request.POST['email'], password=request.POST['password'],status="resign").exists():
+                
+                member=user_registration.objects.get(email=request.POST['email'], password=request.POST['password'])
+                request.session['usr_id'] = member.id 
+                mem1=user_registration.objects.filter(id= member.id)
+                
+                return render(request,'User_home.html',{'mem1':mem1})
+        else:
+            return render(request, 'login.html')
     return render(request,'login.html')
 
+
+
+
+def Registration(request):
+    if request.method == 'POST':
+        acc = user_registration()
+        acc.fullname = request.POST['name']
+        acc.pincode = request.POST['pincode']
+        acc.district = request.POST['district']
+        acc.state = request.POST['state']
+        acc.country = request.POST['country']
+        acc.mobile = request.POST['mobile']
+        acc.email = request.POST['email']
+        acc.password = request.POST['password']
+        acc.save()
+    return render(request,'login.html')
+
+def SuperAdmin_logout(request):
+    if 'SAdm_id' in request.session:
+        if request.session.has_key('SAdm_id'):
+            SAdm_id = request.session['SAdm_id']
+        else:
+            return redirect('/')
+        users = User.objects.filter(id=SAdm_id)
+        request.session.flush()
+        return redirect("/")
+    else:
+        return redirect('/')
+
+######################## Owner Section ######################
+
 def Owner_index(request):
-    return render(request,'Owner_index.html')
+    if 'Own_id' in request.session:
+        if request.session.has_key('Own_id'):
+            Own_id = request.session['Own_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=Own_id)
+        return render(request,'Owner_index.html',{'mem':mem})
+    else:
+        return redirect('/')
 
 def Owner_home(request):
-    return render(request,'Owner_home.html')
+    if 'Own_id' in request.session:
+        if request.session.has_key('Own_id'):
+            Own_id = request.session['Own_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=Own_id)
+        return render(request,'Owner_home.html',{'mem':mem})
+    else:
+        return redirect('/')
 
 def Owner_addbunk(request):
-    return render(request,'Owner_addbunk.html')
+    if 'Own_id' in request.session:
+        if request.session.has_key('Own_id'):
+            Own_id = request.session['Own_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=Own_id)
+        if request.method=='POST':
+            current_id = request.session['Own_id'] 
+            b_name = request.POST['bunkname']
+            vtype = request.POST.getlist('checks[]')
+            contrs = request.POST.getlist('checkss[]')
+            email = request.POST['email']
+            ph = request.POST['phone']
+            address = request.POST['address']
+            city = request.POST['city']
+            state = request.POST['state']
+            pincode = request.POST['pincode']
+            country = request.POST['country']
+            img=request.FILES.get('file')
+            addbunk=bunk(owner_ide=current_id,
+                         bunk_name=b_name,
+                         vehicle_type=vtype,
+                         connector=contrs,
+                         email=email,
+                         phone=ph,
+                         address=address,
+                         city=city,
+                         state=state,
+                         country=country,
+                         pincode=pincode,
+                         image=img)
+            addbunk.save()
+            return render(request, 'Owner_addbunk.html',{'mem':mem})
+        return render(request,'Owner_addbunk.html')
+    else:
+        return redirect('/')
 
 def Owner_view_booking(request):
-    return render(request,'Owner_view_booking.html')
+    if 'Own_id' in request.session:
+        if request.session.has_key('Own_id'):
+            Own_id = request.session['Own_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=Own_id)
+        return render(request,'Owner_view_booking.html',{'mem':mem})
+    else:
+        return redirect('/')
 
 def Owner_contact(request):
-    return render(request,'Owner_contact.html')
+    if 'Own_id' in request.session:
+        if request.session.has_key('Own_id'):
+            Own_id = request.session['Own_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=Own_id)
+        return render(request,'Owner_contact.html',{'mem':mem})
+    else:
+        return redirect('/')
 
 def Owner_addproduct(request):
-    return render(request,'Owner_addproduct.html')
+    if 'Own_id' in request.session:
+        if request.session.has_key('Own_id'):
+            Own_id = request.session['Own_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=Own_id)
+        return render(request,'Owner_addproduct.html',{'mem':mem})
+    else:
+        return redirect('/')
 
 def Owner_view_product(request):
-    return render(request,'Owner_view_product.html')
+    if 'Own_id' in request.session:
+        if request.session.has_key('Own_id'):
+            Own_id = request.session['Own_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=Own_id)
+        return render(request,'Owner_view_product.html',{'mem':mem})
+    else:
+        return redirect('/')
 
 def Owner_product_edit(request):
-    return render(request,'Owner_product_edit.html')
+    if 'Own_id' in request.session:
+        if request.session.has_key('Own_id'):
+            Own_id = request.session['Own_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=Own_id)
+        return render(request,'Owner_product_edit.html',{'mem':mem})
+    else:
+        return redirect('/')
+
+def Owner_logout(request):
+    if 'Own_id' in request.session:
+        request.session.flush()
+        return redirect('/')
+    else:
+        return redirect('/')
+
+##################### Owner Section end #########################
+
+##################### User Section Start ########################
 
 def User_index(request):
-    return render(request,'User_index.html')
+    if 'usr_id' in request.session:
+        if request.session.has_key('usr_id'):
+            usr_id = request.session['usr_id']
+        else:
+            return redirect('/')
+        mem1 = user_registration.objects.filter(id=usr_id)
+        return render(request,'User_index.html',{'mem1':mem1})
+    else:
+        return redirect('/')
 
 def User_home(request):
-    return render(request,'User_home.html')
+    if 'usr_id' in request.session:
+        if request.session.has_key('usr_id'):
+            usr_id = request.session['usr_id']
+        else:
+            return redirect('/')
+        mem1 = user_registration.objects.filter(id=usr_id)
+        return render(request,'User_home.html',{'mem1':mem1})
+    else:
+        return redirect('/')
 
 def User_about(request):
-    return render(request,'User_about.html')
+    if 'usr_id' in request.session:
+        if request.session.has_key('usr_id'):
+            usr_id = request.session['usr_id']
+        else:
+            return redirect('/')
+        mem1 = user_registration.objects.filter(id=usr_id)
+        return render(request,'User_about.html',{'mem1':mem1})
+    else:
+        return redirect('/')
 
 def User_allbunk(request):
-    return render(request,'User_allbunk.html')
+    if 'usr_id' in request.session:
+        if request.session.has_key('usr_id'):
+            usr_id = request.session['usr_id']
+        else:
+            return redirect('/')
+        mem1 = user_registration.objects.filter(id=usr_id)
+        return render(request,'User_allbunk.html',{'mem1':mem1})
+    else:
+        return redirect('/')
 
 def User_contact(request):
-    return render(request,'User_contact.html')
+    if 'usr_id' in request.session:
+        if request.session.has_key('usr_id'):
+            usr_id = request.session['usr_id']
+        else:
+            return redirect('/')
+        mem1 = user_registration.objects.filter(id=usr_id)
+        return render(request,'User_contact.html',{'mem1':mem1})
+    else:
+        return redirect('/')
 
 def User_shop(request):
-    return render(request,'User_shop.html')
+    if 'usr_id' in request.session:
+        if request.session.has_key('usr_id'):
+            usr_id = request.session['usr_id']
+        else:
+            return redirect('/')
+        mem1 = user_registration.objects.filter(id=usr_id)
+        return render(request,'User_shop.html',{'mem1':mem1})
+    else:
+        return redirect('/')
 
 def User_addcart(request):
-    return render(request,'User_addcart.html')
+    if 'usr_id' in request.session:
+        if request.session.has_key('usr_id'):
+            usr_id = request.session['usr_id']
+        else:
+            return redirect('/')
+        mem1 = user_registration.objects.filter(id=usr_id)
+        return render(request,'User_addcart.html',{'mem1':mem1})
+    else:
+        return redirect('/')
 
 
 def User_booking(request):
-    return render(request,'User_booking.html')
+    if 'usr_id' in request.session:
+        if request.session.has_key('usr_id'):
+            usr_id = request.session['usr_id']
+        else:
+            return redirect('/')
+        mem1 = user_registration.objects.filter(id=usr_id)
+        return render(request,'User_booking.html',{'mem1':mem1})
+    else:
+        return redirect('/')
 
 def User_mybooking(request):
-    return render(request,'User_mybooking.html')
+    if 'usr_id' in request.session:
+        if request.session.has_key('usr_id'):
+            usr_id = request.session['usr_id']
+        else:
+            return redirect('/')
+        mem1 = user_registration.objects.filter(id=usr_id)
+        return render(request,'User_mybooking.html',{'mem1':mem1})
+    else:
+        return redirect('/')
 
 def User_payment_history(request):
-    return render(request,'User_payment_history.html')
+    if 'usr_id' in request.session:
+        if request.session.has_key('usr_id'):
+            usr_id = request.session['usr_id']
+        else:
+            return redirect('/')
+        mem1 = user_registration.objects.filter(id=usr_id)
+        return render(request,'User_payment_history.html',{'mem1':mem1})
+    else:
+        return redirect('/')
+
+def User_logout(request):
+    if 'usr_id' in request.session:
+        request.session.flush()
+        return redirect('/')
+    else:
+        return redirect('/')
+
+###################### User section end ########################
+
+###################### Super Admin section start ###############
 
 def SuperAdmin_index(request):
-    return render(request,'SuperAdmin_index.html')
+    if 'SAdm_id' in request.session:
+        if request.session.has_key('SAdm_id'):
+            SAdm_id = request.session['SAdm_id']
+        else:
+            return redirect('/')
+        users = User.objects.filter(id=SAdm_id)
+        return render(request,'SuperAdmin_index.html',{'users':users})
+    else:
+        return redirect('/')
 
 def SuperAdmin_home(request):
-    return render(request,'SuperAdmin_home.html')
+    if 'SAdm_id' in request.session:
+        if request.session.has_key('SAdm_id'):
+            SAdm_id = request.session['SAdm_id']
+        else:
+            return redirect('/')
+        users = User.objects.filter(id=SAdm_id)
+        return render(request,'SuperAdmin_home.html',{'users':users})
+    else:
+        return redirect('/')
 
 def SuperAdmin_bunkrequest(request):
-    return render(request,'SuperAdmin_bunkrequest.html')
+    if 'SAdm_id' in request.session:
+        if request.session.has_key('SAdm_id'):
+            SAdm_id = request.session['SAdm_id']
+        else:
+            return redirect('/')
+        users = User.objects.filter(id=SAdm_id)
+        return render(request,'SuperAdmin_bunkrequest.html',{'users':users})
+    else:
+        return redirect('/')
 
 def SuperAdmin_bunkbookings(request):
-    return render(request,'SuperAdmin_bunkbookings.html')
+    if 'SAdm_id' in request.session:
+        if request.session.has_key('SAdm_id'):
+            SAdm_id = request.session['SAdm_id']
+        else:
+            return redirect('/')
+        users = User.objects.filter(id=SAdm_id)
+        return render(request,'SuperAdmin_bunkbookings.html',{'users':users})
+    else:
+        return redirect('/')
 
 def SuperAdmin_ownerview(request):
-    return render(request,'SuperAdmin_ownerview.html')
+    if 'SAdm_id' in request.session:
+        if request.session.has_key('SAdm_id'):
+            SAdm_id = request.session['SAdm_id']
+        else:
+            return redirect('/')
+        users = User.objects.filter(id=SAdm_id)
+        return render(request,'SuperAdmin_ownerview.html',{'users':users})
+    else:
+        return redirect('/')
 
 def SuperAdmin_userview(request):
-    return render(request,'SuperAdmin_userview.html')
+    if 'SAdm_id' in request.session:
+        if request.session.has_key('SAdm_id'):
+            SAdm_id = request.session['SAdm_id']
+        else:
+            return redirect('/')
+        users = User.objects.filter(id=SAdm_id)
+        return render(request,'SuperAdmin_userview.html',{'users':users})
+    else:
+        return redirect('/')
+
+###################### Super Admin section end ###############
