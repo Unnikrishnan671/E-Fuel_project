@@ -97,6 +97,23 @@ def Owner_home(request):
     else:
         return redirect('/')
 
+def Owner_addcategory(request):
+    if 'Own_id' in request.session:
+        if request.session.has_key('Own_id'):
+            Own_id = request.session['Own_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=Own_id)
+        if request.method=='POST':
+            c_name=request.POST['c_name']
+            addcategory=category(category_name=c_name
+                                 )
+            addcategory.save()
+            return render(request, 'Owner_addcategory.html')
+        return render(request,'Owner_addcategory.html')
+    else:
+        return redirect('/')
+
 def Owner_addbunk(request):
     if 'Own_id' in request.session:
         if request.session.has_key('Own_id'):
@@ -107,8 +124,8 @@ def Owner_addbunk(request):
         if request.method=='POST':
             current_id = request.session['Own_id'] 
             b_name = request.POST['bunkname']
-            vtype = request.POST.getlist('checks[]')
-            contrs = request.POST.getlist('checkss[]')
+            vtype =request.POST.get('vehicletype')
+            contrs =request.POST.get('connector')
             email = request.POST['email']
             ph = request.POST['phone']
             address = request.POST['address']
@@ -164,7 +181,34 @@ def Owner_addproduct(request):
         else:
             return redirect('/')
         mem = user_registration.objects.filter(id=Own_id)
-        return render(request,'Owner_addproduct.html',{'mem':mem})
+        categorys=category.objects.all()
+        return render(request,'Owner_addproduct.html',{'mem':mem,'categorys':categorys})
+    else:
+        return redirect('/')
+    
+def Owner_addpro(request):
+    if 'Own_id' in request.session:
+        if request.session.has_key('Own_id'):
+            Own_id = request.session['Own_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=Own_id)
+        if request.method=='POST':
+            p_name = request.POST['p_name']
+            sel1 = request.POST['sel']
+            category1=category.objects.get(id=sel1)
+            desc=request.POST['description']
+            price=request.POST['price']
+            img=request.FILES.get('file')
+            addproduct=Product(product_name=p_name,
+                               product_image=img,
+                               price=price,
+                               description=desc,
+                               category=category1
+                               )
+            addproduct.save()
+            return render(request, 'Owner_addproduct.html')
+        return render(request, 'Owner_view_product.html')
     else:
         return redirect('/')
 
@@ -175,20 +219,45 @@ def Owner_view_product(request):
         else:
             return redirect('/')
         mem = user_registration.objects.filter(id=Own_id)
-        return render(request,'Owner_view_product.html',{'mem':mem})
+        products=Product.objects.all()
+        return render(request,'Owner_view_product.html',{'mem':mem,'products':products})
     else:
         return redirect('/')
 
-def Owner_product_edit(request):
+def Owner_product_edit(request,p_id):
     if 'Own_id' in request.session:
         if request.session.has_key('Own_id'):
             Own_id = request.session['Own_id']
         else:
             return redirect('/')
         mem = user_registration.objects.filter(id=Own_id)
-        return render(request,'Owner_product_edit.html',{'mem':mem})
+        products=Product.objects.get(id=p_id)
+        return render(request,'Owner_product_edit.html',{'mem':mem,'products':products})
     else:
         return redirect('/')
+
+def edit_product_details(request,products_id):
+    if 'Own_id' in request.session:
+        if request.session.has_key('Own_id'):
+            Own_id = request.session['Own_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=Own_id)
+        if request.method=='POST':
+            products = Product.objects.get(id=products_id)
+            products.product_name = request.POST.get('p_name')
+            products.description = request.POST.get('description')
+            products.price = request.POST.get('price')
+            products.product_image = request.FILES.get('file')
+            products.save()
+            return redirect('Owner_view_product')
+        return render(request, 'Owner_product_edit.html')
+    else:
+        return redirect('/')
+def delete_product(request,p_id):
+    products=Product.objects.get(id=p_id)
+    products.delete()
+    return redirect('Owner_view_product')
 
 def Owner_logout(request):
     if 'Own_id' in request.session:
@@ -241,7 +310,39 @@ def User_allbunk(request):
         else:
             return redirect('/')
         mem1 = user_registration.objects.filter(id=usr_id)
-        return render(request,'User_allbunk.html',{'mem1':mem1})
+        bunks=bunk.objects.all()
+        return render(request,'User_allbunk.html',{'mem1':mem1,'bunks':bunks})
+    else:
+        return redirect('/')
+
+def book_bunk(request):
+    if 'usr_id' in request.session:
+        if request.session.has_key('usr_id'):
+            usr_id = request.session['usr_id']
+        else:
+            return redirect('/')
+        mem1 = user_registration.objects.filter(id=usr_id)
+        if request.method=='POST':
+            nam=request.POST['u_name']
+            em=request.POST['email']
+            ph=request.POST['phone']
+            u_vtype=request.POST['v_type']
+            u_vconnector=request.POST['c_type']
+            da=request.POST['date']
+            ti=request.POST['time']
+            addbunkbook=bunk_booked(user_ide=usr_id,
+                                 name=nam,
+                                 email=em,
+                                 phone=ph,
+                                 uservehicle_type=u_vtype,
+                                 userconnector=u_vconnector,
+                                 date=da,
+                                 time=ti
+                                 )
+            addbunkbook.save()
+            print('save')
+            return redirect('User_booking')
+        return render(request,'User_mybooking.html')
     else:
         return redirect('/')
 
@@ -279,14 +380,15 @@ def User_addcart(request):
         return redirect('/')
 
 
-def User_booking(request):
+def User_booking(request,i_id):
     if 'usr_id' in request.session:
         if request.session.has_key('usr_id'):
             usr_id = request.session['usr_id']
         else:
             return redirect('/')
         mem1 = user_registration.objects.filter(id=usr_id)
-        return render(request,'User_booking.html',{'mem1':mem1})
+        book=bunk.objects.get(id=i_id)
+        return render(request,'User_booking.html',{'mem1':mem1,'book':book})
     else:
         return redirect('/')
 

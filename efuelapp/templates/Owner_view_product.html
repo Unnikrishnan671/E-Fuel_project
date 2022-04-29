@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-6 text-center mb-5">
-                <h2 class="heading-section mt-3 mb-3"><span style="color: rgb(168, 168, 168);">Booking Details</span></h2>
+                <h2 class="heading-section mt-3 mb-3"><span style="color: rgb(168, 168, 168);">Products details</span></h2>
             </div>
         </div>
         <div class="row">
@@ -16,19 +16,22 @@
                           <th>Description</th>
                           <th>Price</th>
                           <th>Image</th>
+                          <th>Category</th>
                           <th>Action</th>
                           <th>&nbsp;</th>
                         </tr>
                       </thead>
                       <tbody>
+                        {% for p in products %}
                         <tr class="alert" role="alert">
-                          <th scope="row">001</th>
-                          <td>Mark</td>
-                          <td>Car</td>
-                          <td>J1772</td>
-                          <td scope="row"><a href="{% url 'Owner_product_edit' %}">Edit</a>
+                          <td scope="row">{{ p.product_name }}</td>
+                          <td scope="row">{{ p.description }}</td>
+                          <td scope="row">{{ p.price }}</td>
+                          <td scope="row"><img src="{{ p.product_image.url }}" class="w-25"></td>
+                          <td scope="row">{{ p.category.category_name}}</td>
+                          <td scope="row"><a href="{% url 'Owner_product_edit' p.id %}">Edit</a>
                             <br>
-                            <a href="">Delete</a>
+                            <a href="{% url 'delete_product' p.id %}">Delete</a>
                         </td>
                           <td>
                               <a href="#" class="close" data-dismiss="alert" aria-label="Close">
@@ -36,36 +39,7 @@
                           </a>
                         </td>
                         </tr>
-                        <tr class="alert" role="alert">
-                            <th scope="row">001</th>
-                            <td>Mark</td>
-                            <td>Car</td>
-                            <td>J1772</td>
-                            <td scope="row"><a href="">Edit</a>
-                              <br>
-                              <a href="">Delete</a>
-                          </td>
-                            <td>
-                                <a href="#" class="close" data-dismiss="alert" aria-label="Close">
-                              <span aria-hidden="true"><i class="fa fa-close"></i></span>
-                            </a>
-                          </td>
-                          </tr>
-                          <tr class="alert" role="alert">
-                            <th scope="row">001</th>
-                            <td>Mark</td>
-                            <td>Car</td>
-                            <td>J1772</td>
-                            <td scope="row"><a href="{% url 'Owner_product_edit' %}">Edit</a>
-                              <br>
-                              <a href="">Delete</a>
-                          </td>
-                            <td>
-                                <a href="#" class="close" data-dismiss="alert" aria-label="Close">
-                              <span aria-hidden="true"><i class="fa fa-close"></i></span>
-                            </a>
-                          </td>
-                          </tr>
+                        {% endfor %}
                       </tbody>
                     </table>
                 </div>

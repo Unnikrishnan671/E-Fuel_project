@@ -6,6 +6,46 @@
     <!-- CSS Libraries -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function()
+      {
+          $('.chkbox').click(function()
+          {
+              var text="";
+              $('.chkbox:checked').each(function()
+              {
+                  text+=$(this).val()+',';
+              });
+              $('#chktext').val(text);
+          });
+          $('#but1').click(function()
+          {
+            alert("record saved");
+          });
+      });
+  </script>
+      <script type="text/javascript">
+        $(document).ready(function()
+        {
+            $('.chkboxx').click(function()
+            {
+                var text="";
+                $('.chkboxx:checked').each(function()
+                {
+                    text+=$(this).val()+',';
+                });
+                $('#chktextt').val(text);
+            });
+            $('#but1').click(function()
+            {
+              alert("record saved");
+            });
+        });
+    </script>
 </head>
 <div class="row">
     <div class="col-75">
@@ -19,30 +59,35 @@
             </div>
             <div class="col-50">
                     <label for="eca">Vehicle type:</label>
-                      <input type="checkbox" id="car" name="checks[]" value="car">
+                      <input type="checkbox" id="car" class="chkbox" value="car">
                       <label for="car">Car</label>
-                      <input type="checkbox" id="bike" name="checks[]" value="bike">
+                      <input type="checkbox" id="bike" class="chkbox" value="bike">
                       <label for="NSS">Bike</label>
-                      <input type="checkbox" id="auto" name="checks[]" value="auto">
+                      <input type="checkbox" id="auto" class="chkbox" value="auto">
                       <label for="auto">Auto</label>
+                      <input  type="text" id="chktext" name="vehicletype"/>
             </div><br>
             </div>
             <div class="row">
               <div class="col-50">
                 <label>Connecters</label><br><br>
-                  <input type="checkbox" name="checkss[]" value="J1772">J1772<br><br>
-                  <input type="checkbox" name="checkss[]" value="Type 2">Type 2<br><br>
-                  <input type="checkbox" name="checkss[]" value="Type 3A">Type 3A<br><br>
-                  <input type="checkbox" name="checkss[]" value="Type 3C">Type 3C<br><br>
-                  <input type="checkbox" name="checkss[]" value="TeslaR">TeslaR<br><br>
+                  
+                  <input type="checkbox" class="chkboxx" value="J1772">J1772<br><br>
+                  <input type="checkbox" class="chkboxx" value="Type 2">Type 2<br><br>
+                  <input type="checkbox" class="chkboxx" value="Type 3A">Type 3A<br><br>
+                  <input type="checkbox" class="chkboxx" value="Type 3C">Type 3C<br><br>
+                  <input type="checkbox" class="chkboxx" value="TeslaR">TeslaR<br><br>
               </div>
               <div class="col-50">
-                  <label>Connecters</label><br><br>
-                  <input type="checkbox" name="checkss[]" value="CHAdMO">CHAdMO<br><br>
-                  <input type="checkbox" name="checkss[]" value="CCS 1">CCS 1<br><br>
-                  <input type="checkbox" name="checkss[]" value="CCS 2">CCS 2<br><br>
-                  <input type="checkbox" name="checkss[]" value="EU-Schuko">EU-Schuko<br><br>
-                  <input type="checkbox" name="checkss[]" value="Nema 15">Nema 15<br><br>
+                <label>Connecters</label><br><br>
+
+                  <input type="checkbox" class="chkboxx" value="CHAdMO">CHAdMO<br><br>
+                  <input type="checkbox" class="chkboxx" value="CCS 1">CCS 1<br><br>
+                  <input type="checkbox" class="chkboxx" value="CCS 2">CCS 2<br><br>
+                  <input type="checkbox" class="chkboxx" value="EU-Schuko">EU-Schuko<br><br>
+                  <input type="checkbox" class="chkboxx" value="Nema 15">Nema 15<br><br>
+                  <input  type="text" id="chktextt" name="connector"/>
+                  
              </div>
           </div>
      <h3>Contact Information</h3>
