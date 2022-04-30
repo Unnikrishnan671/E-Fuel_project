@@ -29,9 +29,9 @@
                           <td scope="row">{{ p.price }}</td>
                           <td scope="row"><img src="{{ p.product_image.url }}" class="w-25"></td>
                           <td scope="row">{{ p.category.category_name}}</td>
-                          <td scope="row"><a href="{% url 'Owner_product_edit' p.id %}">Edit</a>
+                          <td scope="row"><button class="btn btn-primary "  ><a href="{% url 'Owner_product_edit' p.id %}" class="text-white">Edit</a></button>
                             <br>
-                            <a href="{% url 'delete_product' p.id %}">Delete</a>
+                            <button class="btn btn-primary" style="background-color: rgb(255, 83, 83);"><a href="{% url 'delete_product' p.id %}" class="text-white">Delete</a></button>
                         </td>
                           <td>
                               <a href="#" class="close" data-dismiss="alert" aria-label="Close">
