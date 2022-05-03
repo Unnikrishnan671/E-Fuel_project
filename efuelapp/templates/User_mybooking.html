@@ -15,6 +15,7 @@
                           <th>Vehicle type</th>
                           <th>Connector</th>
                           <th>Email</th>
+                          <th>Phone No</th>
                           <th>Date</th>
                           <th>Time</th>
                           <th>Action</th>
@@ -22,66 +23,19 @@
                         </tr>
                       </thead>
                       <tbody>
+                        {% for i in mybooking %}
                         <tr class="alert" role="alert">
-                          <th scope="row">001</th>
-                          <td>Mark</td>
-                          <td>Car</td>
-                          <td>J1772</td>
-                          <td>markotto@email.com</td>
-                          <td>12/03/2022</td>
-                          <td>12:00</td>
-                          <td><button type="button" class="btn btn-danger btn-md" style="background-color: rgb(255, 68, 68);" >
-                            Cancel
-                          </button></td>
+                          <td scope="row">{{ i.user_ide }}</td>
+                          <td scope="row">{{ i.name }}</td>
+                          <td scope="row">{{ i.uservehicle_type }}</td>
+                          <td scope="row">{{ i.userconnector }}</td>
+                          <td scope="row">{{ i.email }}</td>
+                          <td scope="row">{{ i.phone }}</td>
+                          <td scope="row">{{ i.date }}</td>
+                          <td scope="row">{{ i.time }}</td>
+                          <td scope="row"><button class="btn btn-primary" style="background-color: rgb(255, 83, 83);"><a href="{% url 'cancel_booking' i.id %}" class="text-white">Cancel</a></button></td>
                         </tr>
-                        <tr class="alert" role="alert">
-                          <th scope="row">002</th>
-                          <td>Jacob</td>
-                          <td>Bike</td>
-                          <td>Type 2</td>
-                          <td>jacobthornton@email.com</td>
-                          <td>12/03/2022</td>
-                          <td>12:00</td>
-                          <td><button type="button" class="btn btn-danger btn-md" style="background-color: rgb(255, 68, 68);" >
-                            Cancel
-                          </button></td>
-                        </tr>
-                        <tr class="alert" role="alert">
-                          <th scope="row">003</th>
-                          <td>Larry</td>
-                          <td>Auto</td>
-                          <td>Type 3A</td>
-                          <td>larrybird@email.com</td>
-                          <td>12/03/2022</td>
-                          <td>12:00</td>
-                          <td><button type="button" class="btn btn-danger btn-md" style="background-color: rgb(255, 68, 68);" >
-                            Cancel
-                          </button></td>
-                        </tr>
-                        <tr class="alert" role="alert">
-                          <th scope="row">004</th>
-                          <td>John</td>
-                          <td>Bike</td>
-                          <td>TeslaR</td>
-                          <td>johndoe@email.com</td>
-                          <td>12/03/2022</td>
-                          <td>12:00</td>
-                          <td><button type="button" class="btn btn-danger btn-md" style="background-color: rgb(255, 68, 68);" >
-                            Cancel
-                          </button></td>
-                        </tr>
-                        <tr class="alert" role="alert">
-                          <th scope="row">005</th>
-                          <td>Gary</td>
-                          <td>Car</td>
-                          <td>CHAdMO</td>
-                          <td>garybird@email.com</td>
-                          <td>12/03/2022</td>
-                          <td>12:00</td>
-                          <td><button type="button" class="btn btn-danger btn-md" style="background-color: rgb(255, 68, 68);" >
-                            Cancel
-                          </button></td>
-                        </tr>
+                        {%endfor%}
                       </tbody>
                     </table>
                 </div>
