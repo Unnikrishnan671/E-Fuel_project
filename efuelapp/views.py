@@ -11,6 +11,9 @@ from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import auth, User
 from django.db.models import Q
+
+from efuel.settings import EMAIL_HOST_USER
+from django.core.mail import send_mail
 # from efuel.settings import EMAIL_HOST_USER
 # from django.core.mail import send_mail
 
@@ -26,14 +29,14 @@ def login(request):
             request.session['SAdm_id'] = user.id
             return redirect( 'SuperAdmin_home')
 
-        elif user_registration.objects.filter(email=request.POST['email'], password=request.POST['password'],status="active").exists():
+        elif user_registration.objects.filter(email=request.POST['email'], password=request.POST['password'],status="owner").exists():
         
                 member=user_registration.objects.get(email=request.POST['email'], password=request.POST['password'])
                 request.session['Own_id'] = member.id 
                 mem=user_registration.objects.filter(id= member.id)
                 return render(request,'Owner_home.html',{'mem':mem})
 
-        elif user_registration.objects.filter(email=request.POST['email'], password=request.POST['password'],status="resign").exists():
+        elif user_registration.objects.filter(email=request.POST['email'], password=request.POST['password'],status="user").exists():
                 
                 member=user_registration.objects.get(email=request.POST['email'], password=request.POST['password'])
                 request.session['usr_id'] = member.id 
@@ -159,7 +162,42 @@ def Owner_view_booking(request):
         else:
             return redirect('/')
         mem = user_registration.objects.filter(id=Own_id)
-        return render(request,'Owner_view_booking.html',{'mem':mem})
+        bookings=bunk_booked.objects.filter(bunkowner_ide=Own_id)
+        return render(request,'Owner_view_booking.html',{'mem':mem,'bookings':bookings})
+    else:
+        return redirect('/')
+
+def Owner_change_time(request,i_id):
+    if 'Own_id' in request.session:
+        if request.session.has_key('Own_id'):
+            Own_id = request.session['Own_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=Own_id)
+        booking=bunk_booked.objects.get(id=i_id)
+        return render(request,'Owner_change_time.html',{'mem':mem,'booking':booking})
+    else:
+        return redirect('/')
+
+def change_time(request,booking_id):
+    if 'Own_id' in request.session:
+        if request.session.has_key('Own_id'):
+            Own_id = request.session['Own_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=Own_id)
+        if request.method=='POST':
+            bookings = bunk_booked.objects.get(id=booking_id)
+            bookings.date = request.POST.get('date')
+            bookings.time = request.POST.get('time')
+            bookings.save()
+            subject = 'Time schedule changed'
+            message = 'dear customer,\nSorry for the inconvienience.'
+            recipient = bookings.email
+            send_mail(subject,message, settings.EMAIL_HOST_USER, [recipient], fail_silently=False)
+            messages.success(request, 'Success!')
+            return redirect('Owner_view_booking')
+        return render(request, 'Owner_change_time.html')
     else:
         return redirect('/')
 
@@ -170,9 +208,33 @@ def Owner_contact(request):
         else:
             return redirect('/')
         mem = user_registration.objects.filter(id=Own_id)
+        if request.method=='POST':
+            u_name=request.POST['name']
+            email=request.POST['email']
+            sub=request.POST['subject']
+            mess=request.POST['message']
+            addcontact=admin_contact(name=u_name,
+                                     email=email,
+                                     subject=sub,
+                                     message=mess)
+            addcontact.save()
+            return render(request, 'Owner_contact.html')
         return render(request,'Owner_contact.html',{'mem':mem})
     else:
         return redirect('/')
+
+def Owner_contact_view(request):
+    if 'Own_id' in request.session:
+        if request.session.has_key('Own_id'):
+            Own_id = request.session['Own_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=Own_id)
+        contacts=owner_contact.objects.all()
+        return render(request,'Owner_contact_view.html',{'mem':mem,'contacts':contacts})
+    else:
+        return redirect('/')
+
 
 def Owner_addproduct(request):
     if 'Own_id' in request.session:
@@ -207,7 +269,7 @@ def Owner_addpro(request):
                                category=category1
                                )
             addproduct.save()
-            return render(request, 'Owner_addproduct.html')
+            return redirect('Owner_addproduct')
         return render(request, 'Owner_view_product.html')
     else:
         return redirect('/')
@@ -254,6 +316,46 @@ def edit_product_details(request,products_id):
         return render(request, 'Owner_product_edit.html')
     else:
         return redirect('/')
+
+def Owner_add_payment(request,i_id):
+    if 'Own_id' in request.session:
+        if request.session.has_key('Own_id'):
+            Own_id = request.session['Own_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=Own_id)
+        pay=bunk_booked.objects.get(id=i_id)
+        return render(request,'Owner_add_payment.html',{'mem':mem,'pay':pay})
+    else:
+        return redirect('/')
+
+def add_payment(request,pay_user_ide):
+    if 'Own_id' in request.session:
+        if request.session.has_key('Own_id'):
+            Own_id = request.session['Own_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=Own_id)
+        us_ide=pay_user_ide
+        if request.method=='POST':
+            date=request.POST['date']
+            bname=request.POST['bankname']
+            accnum=request.POST['accnumber']
+            ifse=request.POST['ifsecode']
+            amo=request.POST['amount']
+            addpayment=payment(user_ide=us_ide,
+                                 date=date,
+                                 payment=amo,
+                                 bank=bname,
+                                 accountnumber=accnum,
+                                 ifse=ifse,
+                                 )
+            addpayment.save()
+            return redirect('Owner_view_booking')
+        return render(request,'Owner_view_booking.html',{'mem':mem})
+    else:
+        return redirect('/')
+
 def delete_product(request,p_id):
     products=Product.objects.get(id=p_id)
     products.delete()
@@ -315,22 +417,24 @@ def User_allbunk(request):
     else:
         return redirect('/')
 
-def book_bunk(request):
+def book_bunk(request,book_owner_ide):
     if 'usr_id' in request.session:
         if request.session.has_key('usr_id'):
             usr_id = request.session['usr_id']
         else:
             return redirect('/')
         mem1 = user_registration.objects.filter(id=usr_id)
+        bown_ide=book_owner_ide
         if request.method=='POST':
             nam=request.POST['u_name']
             em=request.POST['email']
             ph=request.POST['phone']
-            u_vtype=request.POST['v_type']
-            u_vconnector=request.POST['c_type']
+            u_vtype=request.POST['sel1']
+            u_vconnector=request.POST['sel2']
             da=request.POST['date']
             ti=request.POST['time']
             addbunkbook=bunk_booked(user_ide=usr_id,
+                                 bunkowner_ide=bown_ide,
                                  name=nam,
                                  email=em,
                                  phone=ph,
@@ -340,9 +444,8 @@ def book_bunk(request):
                                  time=ti
                                  )
             addbunkbook.save()
-            print('save')
-            return redirect('User_booking')
-        return render(request,'User_mybooking.html')
+            return render(request, 'User_allbunk.html')
+        return render(request, 'User_allbunk.html')
     else:
         return redirect('/')
 
@@ -353,6 +456,17 @@ def User_contact(request):
         else:
             return redirect('/')
         mem1 = user_registration.objects.filter(id=usr_id)
+        if request.method=='POST':
+            u_name=request.POST['name']
+            email=request.POST['email']
+            sub=request.POST['subject']
+            mess=request.POST['message']
+            addcontact=owner_contact(name=u_name,
+                                     email=email,
+                                     subject=sub,
+                                     message=mess)
+            addcontact.save()
+            return render(request, 'User_contact.html')
         return render(request,'User_contact.html',{'mem1':mem1})
     else:
         return redirect('/')
@@ -364,7 +478,8 @@ def User_shop(request):
         else:
             return redirect('/')
         mem1 = user_registration.objects.filter(id=usr_id)
-        return render(request,'User_shop.html',{'mem1':mem1})
+        products=Product.objects.all()
+        return render(request,'User_shop.html',{'mem1':mem1,'products':products})
     else:
         return redirect('/')
 
@@ -388,7 +503,7 @@ def User_booking(request,i_id):
             return redirect('/')
         mem1 = user_registration.objects.filter(id=usr_id)
         book=bunk.objects.get(id=i_id)
-        return render(request,'User_booking.html',{'mem1':mem1,'book':book})
+        return render(request,'User_booking.html',{'mem1':mem1,'book':book,'v_list':book.vehicle_type.split(","),'c_list':book.connector.split(",")})
     else:
         return redirect('/')
 
@@ -399,7 +514,8 @@ def User_mybooking(request):
         else:
             return redirect('/')
         mem1 = user_registration.objects.filter(id=usr_id)
-        return render(request,'User_mybooking.html',{'mem1':mem1})
+        mybooking=bunk_booked.objects.filter(user_ide=usr_id)
+        return render(request,'User_mybooking.html',{'mem1':mem1,'mybooking':mybooking})
     else:
         return redirect('/')
 
@@ -410,7 +526,8 @@ def User_payment_history(request):
         else:
             return redirect('/')
         mem1 = user_registration.objects.filter(id=usr_id)
-        return render(request,'User_payment_history.html',{'mem1':mem1})
+        payments=payment.objects.filter(user_ide=usr_id)
+        return render(request,'User_payment_history.html',{'mem1':mem1,'payments':payments})
     else:
         return redirect('/')
 
@@ -420,6 +537,11 @@ def User_logout(request):
         return redirect('/')
     else:
         return redirect('/')
+
+def cancel_booking(request,i_id):
+    booking=bunk_booked.objects.get(id=i_id)
+    booking.delete()
+    return redirect('User_mybooking')
 
 ###################### User section end ########################
 
@@ -454,7 +576,22 @@ def SuperAdmin_bunkrequest(request):
         else:
             return redirect('/')
         users = User.objects.filter(id=SAdm_id)
-        return render(request,'SuperAdmin_bunkrequest.html',{'users':users})
+        bunkreq=bunk.objects.all()
+        return render(request,'SuperAdmin_bunkrequest.html',{'users':users,'bunkreq':bunkreq})
+    else:
+        return redirect('/')
+
+def decline_bunk(request,i_id):
+    if 'SAdm_id' in request.session:
+        if request.session.has_key('SAdm_id'):
+            SAdm_id = request.session['SAdm_id']
+        else:
+            return redirect('/')
+        users = User.objects.filter(id=SAdm_id)
+        booking=bunk.objects.get(id=i_id)
+        booking.delete()
+        return redirect('SuperAdmin_bunkrequest')
+        return render(request,'SuperAdmin_index.html',{'users':users})
     else:
         return redirect('/')
 
@@ -465,7 +602,8 @@ def SuperAdmin_bunkbookings(request):
         else:
             return redirect('/')
         users = User.objects.filter(id=SAdm_id)
-        return render(request,'SuperAdmin_bunkbookings.html',{'users':users})
+        booking=bunk_booked.objects.all()
+        return render(request,'SuperAdmin_bunkbookings.html',{'users':users,'booking':booking})
     else:
         return redirect('/')
 
@@ -476,19 +614,62 @@ def SuperAdmin_ownerview(request):
         else:
             return redirect('/')
         users = User.objects.filter(id=SAdm_id)
-        return render(request,'SuperAdmin_ownerview.html',{'users':users})
+        usrs = user_registration.objects.all()
+        return render(request,'SuperAdmin_ownerview.html',{'users':users,'usrs':usrs})
     else:
         return redirect('/')
 
-def SuperAdmin_userview(request):
+def SuperAdmin_change_desig(request,i_id):
     if 'SAdm_id' in request.session:
         if request.session.has_key('SAdm_id'):
             SAdm_id = request.session['SAdm_id']
         else:
             return redirect('/')
         users = User.objects.filter(id=SAdm_id)
-        return render(request,'SuperAdmin_userview.html',{'users':users})
+        usrs=user_registration.objects.get(id=i_id)
+        return render(request,'SuperAdmin_change_desig.html',{'users':users,'usrs':usrs})
     else:
         return redirect('/')
+
+def change_designation(request,usrs_id):
+    if 'SAdm_id' in request.session:
+        if request.session.has_key('SAdm_id'):
+            SAdm_id = request.session['SAdm_id']
+        else:
+            return redirect('/')
+        users = User.objects.filter(id=SAdm_id)
+        if request.method=='POST':
+            userdesig = user_registration.objects.get(id=usrs_id)
+            userdesig.fullname = request.POST.get('name')
+            userdesig.email = request.POST.get('email')
+            userdesig.status = request.POST.get('sel')
+            userdesig.save()
+            subject = 'Time schedule changed'
+            message = 'dear customer,\nSorry for the inconvienience.'
+            recipient = userdesig.email
+            send_mail(subject,message, settings.EMAIL_HOST_USER, [recipient], fail_silently=False)
+            messages.success(request, 'Success!')
+            return redirect('SuperAdmin_ownerview')
+        return render(request, 'SuperAdmin_ownerview.html')
+    else:
+        return redirect('/')
+
+def SuperAdmin_view_contacts(request):
+    if 'SAdm_id' in request.session:
+        if request.session.has_key('SAdm_id'):
+            SAdm_id = request.session['SAdm_id']
+        else:
+            return redirect('/')
+        users = User.objects.filter(id=SAdm_id)
+        contacts=admin_contact.objects.all()
+        return render(request,'SuperAdmin_contact_view.html',{'users':users,'contacts':contacts})
+    else:
+        return redirect('/')
+
+def delete_user(request,i_id):
+    userss=user_registration.objects.get(id=i_id)
+    userss.delete()
+    return redirect('SuperAdmin_ownerview')
+
 
 ###################### Super Admin section end ###############

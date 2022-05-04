@@ -1,5 +1,5 @@
 {% extends 'SuperAdmin_index.html'%} {% load static %} {% block content %}
-<section class="ftco-section">
+<section>
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-6 text-center mb-5">
@@ -7,99 +7,41 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-2">
-
-            </div>
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="table-wrap">
                     <table class="table text-center">
                       <thead class="thead-dark">
                         <tr>
-                          <th>User Name</th>
+                          <th>Full Name</th>
                           <th>Email</th>
                           <th>Phone</th>
+                          <th>Pincode</th>
+                          <th>District</th>
+                          <th>State</th>
+                          <th>Country</th>
                           <th>Designation</th>
-                          <th>Action</th>
                           <th>Action</th>
                           <th>&nbsp;</th>
                         </tr>
                       </thead>
                       <tbody>
+                        {% for i in usrs %}
                         <tr class="alert" role="alert">
-                          <th scope="row">User name 1</th>
-                          <td>own@gmail.com</td>
-                          <td>Phone</td>
-                          <td>
-                            <select class="btn btn-primary btn-xs" name="tstatus">
-                              <option>Owner</option>
-                              <option>User</option>
-                            </select>
-                          </td>
-                          <td>
-                            <button type="submit" class="btn btn-xs btn-primary btn-icon-text">
-                              <i class="ti-file btn-icon-prepend"></i>
-                              Submit
-                            </button>
-                          </td>
-                          <td>
-                            <button type="submit" class="btn btn-xs btn-icon-text" style="background-color: rgb(255, 90, 81);">
-                              <i class="ti-file btn-icon-prepend"></i>
-                              Remove
-                            </button>
-                          </td>
+                          <td scope="row">{{ i.fullname }}</td>
+                          <td scope="row">{{ i.email }}</td>
+                          <td scope="row">{{ i.mobile }}</td>
+                          <td scope="row">{{ i.pincode }}</td>
+                          <td scope="row">{{ i.district }}</td>
+                          <td scope="row">{{ i.state }}</td>
+                          <td scope="row">{{ i.country }}</td>
+                          <td scope="row">{{ i.status }}</td>
+                          <td ><a href="{% url 'SuperAdmin_change_desig' i.id %}" class="text-white btn btn-primary ">Change designation</a></td>
+                          <td ><a href="{% url 'delete_user' i.id %}" class="text-white btn btn-primary " style="background-color: rgb(255, 61, 61);">Delete</a></td>
                         </tr>
-                        <tr class="alert" role="alert">
-                            <th scope="row">User name 1</th>
-                            <td>own@gmail.com</td>
-                            <td>Phone</td>
-                            <td>
-                              <select class="btn btn-primary btn-xs" name="tstatus">
-                                <option>Active</option>
-                                <option>Resign</option>
-                              </select>
-                            </td>
-                            <td>
-                              <button type="submit" class="btn btn-xs btn-primary btn-icon-text">
-                                <i class="ti-file btn-icon-prepend"></i>
-                                Submit
-                              </button>
-                            </td>
-                            <td>
-                                <button type="submit" class="btn btn-xs btn-icon-text" style="background-color: rgb(255, 90, 81);">
-                                  <i class="ti-file btn-icon-prepend"></i>
-                                  Remove
-                                </button>
-                              </td>
-                          </tr>
-                          <tr class="alert" role="alert">
-                            <th scope="row">user name 1</th>
-                            <td>own@gmail.com</td>
-                            <td>Phone</td>
-                            <td>
-                              <select class="btn btn-primary btn-xs" name="tstatus">
-                                <option>Active</option>
-                                <option>Resign</option>
-                              </select>
-                            </td>
-                            <td>
-                              <button type="submit" class="btn btn-xs btn-primary btn-icon-text">
-                                <i class="ti-file btn-icon-prepend"></i>
-                                Submit
-                              </button>
-                            </td>
-                            <td>
-                                <button type="submit" class="btn btn-xs btn-icon-text" style="background-color: rgb(255, 90, 81);">
-                                  <i class="ti-file btn-icon-prepend"></i>
-                                  Remove
-                                </button>
-                              </td>
-                          </tr>
+                        {%endfor%}
                       </tbody>
                     </table>
                 </div>
-            </div>
-            <div class="col-md-2">
-                
             </div>
         </div>
     </div>

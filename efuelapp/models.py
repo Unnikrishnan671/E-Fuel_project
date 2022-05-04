@@ -11,12 +11,12 @@ class user_registration(models.Model):
     mobile = models.CharField(max_length=240, null=True)
     email = models.EmailField(max_length=240, null=True)
     password = models.CharField(max_length=240, null=True)
-    status = models.CharField(max_length=240, null=True, default='resign')
+    status = models.CharField(max_length=240, null=True, default='user')
     def __str__(self):
         return self.fullname
 
 class bunk(models.Model):
-    owner_ide = models.IntegerField(default='0', null=True, blank=True)
+    owner_ide =  models.CharField(max_length=240,null=True)
     bunk_name = models.CharField(max_length=100)
     vehicle_type = models.CharField(max_length=100)
     connector = models.CharField(max_length=100)
@@ -49,6 +49,7 @@ class Product(models.Model):
 class bunk_booked(models.Model):
     Bunk = models.ForeignKey(bunk, on_delete=models.CASCADE, null=True)
     user_ide = models.IntegerField(default='0', null=True, blank=True)
+    bunkowner_ide = models.CharField(max_length=240,null=True)
     name = models.CharField(max_length=240, null=True)
     email = models.EmailField(max_length=240, null=True)
     phone = models.CharField(max_length=240, null=True)
@@ -63,3 +64,31 @@ class bunk_booked(models.Model):
     def __str__(self):
         return self.name
 
+class payment(models.Model):
+    user_ide = models.CharField(max_length=240,null=True)                      
+    date = models.DateField(auto_now_add=False, auto_now=False,  null=True, blank=True)
+    payment = models.CharField(max_length=240, null=True)
+    bank = models.CharField(max_length=240, null=True)
+    accountnumber = models.CharField(max_length=240, null=True)
+    ifse = models.CharField(max_length=240, null=True) 
+
+    def __str__(self):
+        return self.user_ide
+
+class owner_contact(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=240, null=True)
+    subject = models.CharField(max_length=100)
+    message =models.CharField(max_length=225)
+
+    def __str__(self):
+        return self.name
+
+class admin_contact(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=240, null=True)
+    subject = models.CharField(max_length=100)
+    message =models.CharField(max_length=225)
+    
+    def __str__(self):
+        return self.name
