@@ -19,6 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from efuelapp import views
 
+from django.urls import path
 urlpatterns = [
     re_path('admin/', admin.site.urls),
     re_path(r'^$', views.login, name='login'),
@@ -49,7 +50,6 @@ urlpatterns = [
     re_path(r'^User_about/$',views.User_about,name='User_about'),
     re_path(r'^User_allbunk/$',views.User_allbunk,name='User_allbunk'),
     re_path(r'^User_contact/$',views.User_contact,name='User_contact'),
-    re_path(r'^User_shop/$',views.User_shop,name='User_shop'),
     re_path(r'^User_addcart/$',views.User_addcart,name='User_addcart'),
     re_path(r'^User_booking(?P<i_id>[0-9]+)/$',views.User_booking,name='User_booking'),
     re_path(r'^book_bunk(?P<book_owner_ide>[0-9]+)/$',views.book_bunk,name='book_bunk'),
@@ -70,6 +70,12 @@ urlpatterns = [
     
     re_path(r'^delete_user(?P<i_id>[0-9]+)$',views.delete_user,name='delete_user'),
     re_path(r'^SuperAdmin_logout/$', views.SuperAdmin_logout, name='SuperAdmin_logout'),
+
+    re_path(r'^store/$',views.store,name='store'),
+    re_path(r'^cart/$',views.cart,name='cart'),
+    re_path(r'^checkout/$',views.checkout,name='checkout'),
+    re_path(r'^update_item/$',views.updateItem,name='update_item'),
+    re_path(r'^process_order/$',views.processOrder,name='process_order'),
 ]
 
 if settings.DEBUG:
